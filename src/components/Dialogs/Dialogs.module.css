@@ -1,0 +1,24 @@
+.content {
+  grid-area: c;
+  background-color: #2c313c;
+  color: #41a2ef;
+}
+
+.content__img {
+  width: 100%;
+  border-bottom: 1px solid #39474d;
+}
+
+.content__inner {
+  padding: 15px;
+}
+
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  padding: 15px;
+}
+
+.dialogsItems .active {
+  color: #dbe44b;
+}

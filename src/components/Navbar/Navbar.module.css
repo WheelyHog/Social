@@ -1,0 +1,22 @@
+.nav {
+    grid-area: n;
+    background-color: #23272e;
+    padding: 15px;
+    border-right: 1px solid #39474d;
+}
+
+.item {
+    color: #d19a5f;
+}
+
+.nav a {
+    text-decoration: none;
+}
+
+.active {
+    color: #dbe44b;
+}
+
+NavLink {
+    cursor: pointer;
+}
