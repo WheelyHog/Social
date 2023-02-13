@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import store from './components/redux/redux-store';
 import ReactDOM from 'react-dom/client';
-import { Provider } from './StoreContext';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -20,9 +20,8 @@ let rerenderEntireTree = (state) => {
   );
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 store.subscribe(() => {
-  let state = store.getState();
-  rerenderEntireTree(state)
+  rerenderEntireTree()
 });
