@@ -1,9 +1,10 @@
 .header {
-    grid-area: h;
-    background-color: #1e2227;
-    border-bottom: 1px solid #39474d;
-  }
-  .header__img{
-    width: 70px;
-    padding: 15px;
-  }
+  grid-area: h;
+  background-color: #1e2227;
+  border-bottom: 1px solid #39474d;
+  padding: 15px;
+}
+
+.header__img {
+  width: 70px;
+}

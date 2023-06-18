@@ -17,12 +17,3 @@
   color: #41a2ef;
   /* padding: 10px; */
 }
-
-.content__img {
-  width: 100%;
-  border-bottom: 1px solid #39474d;
-}
-
-.content__inner {
-  padding: 15px;
-}

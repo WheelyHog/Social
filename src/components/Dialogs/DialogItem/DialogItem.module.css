@@ -1,0 +1,8 @@
+.dialog a {
+  color: #98c361;
+  text-decoration: none;
+}
+
+.dialog :global(a.active) {
+  color: #dbe44b;
+}

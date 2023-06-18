@@ -1,8 +1,14 @@
-.item{
-    color: #98c361;
-  }
+.item {
+  color: #98c361;
+  margin-bottom: 20px;
+}
 
-  .user__avatar{
-    width: 50px;
-    border-radius: 50%;
-  }
+.user__avatar {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.like_box {
+  display: flex;
+  gap: 20px;
+}
