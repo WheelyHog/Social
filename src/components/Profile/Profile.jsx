@@ -1,13 +1,12 @@
 import React from 'react';
-import s from './Profile.module.css';
-import MyPosts from './MyPosts/MyPosts';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
-export default function Profile({ posts, newPostText, dispatch }) {
+export default function Profile() {
   return (
     <div>
       <ProfileInfo />
-      <MyPosts posts={posts} newPostText={newPostText} dispatch={dispatch} />
+      <MyPostsContainer />
     </div>
   )
 }

@@ -1,21 +1,19 @@
 import React, { useRef } from 'react'
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../redux/state';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 
-export default function MyPosts({ posts, newPostText, dispatch }) {
-  console.log(newPostText);
+export default function MyPosts({ posts, newPostText, addPost, updateNewPosts }) {
 
-  const addNewPost = () => {
-    dispatch(addPostActionCreator())
+  const onAddPost = () => {
+    addPost();
   }
 
   const newPostElement = useRef()
 
   const onPostChange = () => {
     let text = newPostElement.current.value;
-    dispatch(updateNewPostTextActionCreator(text));
+    updateNewPosts(text);
   }
 
   return (
@@ -24,7 +22,7 @@ export default function MyPosts({ posts, newPostText, dispatch }) {
       <div>
         <textarea className={s.posts__textarea} ref={newPostElement} onChange={onPostChange} value={newPostText} />
         <div>
-          <button className={s.add__post} onClick={addNewPost}>Add Post</button>
+          <button className={s.add__post} onClick={onAddPost}>Add Post</button>
         </div>
       </div>
       <div className={s.posts}>
