@@ -28,6 +28,15 @@ let store = {
       ],
       newMessageBody: ''
     },
+    usersPage: {
+      users: [
+        { id: 1, fullname: 'Masha', status: 'I am a boss!', location: { city: 'Dzierzoniow', country: 'Poland' }, followed: false },
+        { id: 2, fullname: 'Dasha', status: 'I am a fishwoman!', location: { city: 'Swidnica', country: 'Hungary' }, followed: true },
+        { id: 3, fullname: 'Sasha', status: 'I am a teacher!', location: { city: 'Wroclaw', country: 'Poland' }, followed: true },
+        { id: 4, fullname: 'Kakasha', status: 'I am a biker!', location: { city: 'New-York', country: 'USA' }, followed: false },
+
+      ]
+    },
     sidebar: {}
   },
   // getState() {
