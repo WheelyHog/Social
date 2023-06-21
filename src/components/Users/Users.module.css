@@ -3,3 +3,7 @@
   border: 1px solid #41a2ef;
   border-radius: 50%;
 }
+
+.selected_page {
+  font-weight: bold;
+}

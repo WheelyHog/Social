@@ -1,16 +1,21 @@
+
+
 const defaultState = {
   users: [
-    { id: 1, fullname: 'Masha', status: 'I am a boss!', location: { city: 'Dzierzoniow', country: 'Poland' }, followed: false, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
-    { id: 2, fullname: 'Dasha', status: 'I am a fishwoman!', location: { city: 'Swidnica', country: 'Hungary' }, followed: true, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
-    { id: 3, fullname: 'Sasha', status: 'I am a teacher!', location: { city: 'Wroclaw', country: 'Poland' }, followed: true, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
-    { id: 4, fullname: 'Kakasha', status: 'I am a biker!', location: { city: 'New-York', country: 'USA' }, followed: false, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
-
-  ]
+    // { id: 1, fullname: 'Masha', status: 'I am a boss!', location: { city: 'Dzierzoniow', country: 'Poland' }, followed: false, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
+    // { id: 2, fullname: 'Dasha', status: 'I am a fishwoman!', location: { city: 'Swidnica', country: 'Hungary' }, followed: true, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
+    // { id: 3, fullname: 'Sasha', status: 'I am a teacher!', location: { city: 'Wroclaw', country: 'Poland' }, followed: true, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
+    // { id: 4, fullname: 'Kakasha', status: 'I am a biker!', location: { city: 'New-York', country: 'USA' }, followed: false, photoUrl: 'https://icons.iconarchive.com/icons/jonathan-rey/simpsons/256/Bart-Simpson-01-icon.png' },
+  ],
+  pageSize: 100,
+  totalUsers: 0,
+  currentPage: 1
 };
 
 const SET_USERS = 'SET_USERS';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 export const usersReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -34,14 +39,20 @@ export const usersReducer = (state = defaultState, action) => {
         })
       }
     case SET_USERS:
-      return { ...state, users: [...state.users, ...action.payload] }
+      return { ...state, users: [...action.payload.items], totalUsers: action.payload.totalCount }
+
+    case SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.payload }
+
 
     default:
       return state
   }
+
 
 }
 
 export const followActionCreator = (payload) => ({ type: FOLLOW, payload })
 export const unfollowActionCreator = (payload) => ({ type: UNFOLLOW, payload })
 export const setUsersActionCreator = (payload) => ({ type: SET_USERS, payload })
+export const setCurrentPageActionCreator = (payload) => ({ type: SET_CURRENT_PAGE, payload })
