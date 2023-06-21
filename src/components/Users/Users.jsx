@@ -1,8 +1,11 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, unfollowActionCreator } from '../../redux/usersReducer'
+import { NavLink } from 'react-router-dom'
+import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, toggleIsFetchingActionCreator, unfollowActionCreator } from '../../redux/usersReducer'
+import Preloader from '../common/Preloader'
 import s from './Users.module.css'
+
 
 export default function Users() {
 
@@ -13,6 +16,7 @@ export default function Users() {
   const pageSize = useSelector(store => store.usersPage.pageSize);
   const totalUsersCount = useSelector(store => store.usersPage.totalUsers);
   const currentPage = useSelector(store => store.usersPage.currentPage);
+
 
   useEffect(() => {
     if (users.length === 0) {
@@ -36,16 +40,16 @@ export default function Users() {
   }
 
   return (
-    <div>
+    <div className={s.users_container}>
       <div>
-        {pages.map(elem => <span key={elem} className={currentPage === elem && s.selected_page} onClick={() => onPageChanged(elem)}>{elem}</span>)}
+        {pages.map(elem => <span key={elem} className={currentPage === elem ? s.selected_page : ''} onClick={() => onPageChanged(elem)}>{elem}</span>)}
 
       </div>
       {users.map(elem =>
         <div key={elem.id}>
           <span>
             <div>
-              <img src={elem.photos.small !== null ? elem.photos.small : fake_photo} className={s.user_photo} alt='user_photo' />
+              <NavLink to={`/profile/${elem.id}`}><img src={elem.photos.small !== null ? elem.photos.small : fake_photo} className={s.user_photo} alt='user_photo' /></NavLink>
             </div>
           </span>
           <span>

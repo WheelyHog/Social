@@ -17,6 +17,7 @@ function App() {
           <Route path='/dialogs' element={<DialogsContainer />} />
           {/* <Route path='/dialogs/:id' element={<DialogsContainer />} /> */}
           <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/:id' element={<Profile />} />
           <Route path='/users' element={<Users />} />
           <Route path='/news' />
           <Route path='/music' />
