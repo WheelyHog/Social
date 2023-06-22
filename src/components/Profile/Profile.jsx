@@ -10,7 +10,10 @@ export default function Profile() {
 
   const base_url = 'https://social-network.samuraijs.com/api/1.0'
   const dispatch = useDispatch()
-  const { id } = useParams()
+  let { id } = useParams()
+  if (!id) {
+    id = 2
+  }
   console.log(id);
 
   const profile = useSelector(store => store.profilePage.profile)
