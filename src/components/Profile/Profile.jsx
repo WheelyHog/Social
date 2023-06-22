@@ -6,9 +6,10 @@ import { setUserProfileAction } from '../../redux/profileReducer';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
+export const base_url = 'https://social-network.samuraijs.com/api/1.0'
+
 export default function Profile() {
 
-  const base_url = 'https://social-network.samuraijs.com/api/1.0'
   const dispatch = useDispatch()
   let { id } = useParams()
   if (!id) {
