@@ -5,8 +5,7 @@ import { useParams } from 'react-router-dom';
 import { setUserProfileAction } from '../../redux/profileReducer';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-
-export const base_url = 'https://social-network.samuraijs.com/api/1.0'
+import { base_url } from "../../api/api";
 
 export default function Profile() {
 
@@ -23,7 +22,7 @@ export default function Profile() {
   useEffect(() => {
     axios.get(`${base_url}/profile/${id}`)
       .then(res => dispatch(setUserProfileAction(res.data)))
-  }, [])
+  }, [dispatch, id])
 
   return (
     <div>
