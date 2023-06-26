@@ -1,9 +1,8 @@
-import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { base_url, usersAPI } from '../../api/api'
-import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, unfollowActionCreator } from '../../redux/usersReducer'
+import { Navigate, NavLink } from 'react-router-dom'
+import { usersAPI } from '../../api/api'
+import { followActionCreator, setCurrentPageActionCreator, setUsersActionCreator, toggleFollowingProgress, unfollowActionCreator } from '../../redux/usersReducer'
 import s from './Users.module.css'
 
 
@@ -15,6 +14,7 @@ export default function Users() {
   const pageSize = useSelector(store => store.usersPage.pageSize);
   const totalUsersCount = useSelector(store => store.usersPage.totalUsers);
   const currentPage = useSelector(store => store.usersPage.currentPage);
+  const followingInProgress = useSelector(store => store.usersPage.followingInProgress)
 
 
   useEffect(() => {
@@ -39,31 +39,31 @@ export default function Users() {
   }
 
   const followUser = (id) => {
-    axios.post(`${base_url}/follow/${id}`, {}, {
-      withCredentials: true,
-      headers: {
-        'API-KEY': 'cf227a27-a1c5-4180-aeb4-398db442d2fa'
-      }
-    })
+    dispatch(toggleFollowingProgress(true))
+    usersAPI.followUser(id)
       .then(response => {
         if (response.data.resultCode === 0) {
           dispatch(followActionCreator(id))
         }
       })
+      .then(dispatch(toggleFollowingProgress(false)))
   }
 
   const unFollowUser = (id) => {
-    axios.delete(`${base_url}/follow/${id}`, {
-      withCredentials: true,
-      headers: {
-        'API-KEY': 'cf227a27-a1c5-4180-aeb4-398db442d2fa'
-      }
-    })
+    dispatch(toggleFollowingProgress(true))
+    usersAPI.unFollowUser(id)
       .then(response => {
         if (response.data.resultCode === 0) {
           dispatch(unfollowActionCreator(id))
         }
       })
+      .then(dispatch(toggleFollowingProgress(false)))
+  }
+
+  const isAuth = useSelector(store => store.auth.data.isAuth)
+
+  if (!isAuth) {
+    return <Navigate to={'/login'} />
   }
 
   return (
@@ -81,8 +81,14 @@ export default function Users() {
           </span>
           <span>
             {elem.followed
-              ? <button onClick={() => unFollowUser(elem.id)}>Unfollow</button>
-              : <button onClick={() => followUser(elem.id)}>Follow</button>}
+              ? <button
+                onClick={() => unFollowUser(elem.id)}
+                disabled={followingInProgress}
+              >Unfollow</button>
+              : <button
+                onClick={() => followUser(elem.id)}
+                disabled={followingInProgress}
+              >Follow</button>}
           </span>
           <span>
             <div>{elem.name}</div>

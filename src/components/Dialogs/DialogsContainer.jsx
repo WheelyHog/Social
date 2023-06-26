@@ -1,11 +1,14 @@
 import React from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 
 export default function DialogsContainer() {
 
   const store = useSelector(store => store.dialogsPage)
+  const isAuth = useSelector(store => store.auth.data.isAuth)
+  console.log(isAuth)
 
   const dispatch = useDispatch()
 
@@ -17,20 +20,11 @@ export default function DialogsContainer() {
     dispatch(updateNewMessageBodyCreator(body))
   }
 
+  if (!isAuth) {
+    return <Navigate to={'/login'} />
+  }
+
   return (
     <Dialogs updateNewMessageBody={onNewMessageChange} sendMessage={onSendMessageClick} store={store} />
   )
 }
-
-// const f1 = () => {
-//   return {
-//     dialogsPage: {}
-//   }
-// }
-// const f2 = () => {
-//   return {
-
-//   }
-// }
-
-// const SuperDialogsContainer = connect(f1, f2)(Dialogs)

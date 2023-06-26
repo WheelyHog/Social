@@ -10,7 +10,8 @@ const defaultState = {
   pageSize: 100,
   totalUsers: 0,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  followingInProgress: false
 };
 
 const SET_USERS = 'SET_USERS';
@@ -18,6 +19,7 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 export const usersReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -47,8 +49,12 @@ export const usersReducer = (state = defaultState, action) => {
       return { ...state, currentPage: action.payload }
 
     case TOGGLE_IS_FETCHING:
-      console.log(action.payload);
       return { ...state, isFetching: action.payload }
+
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+      return { ...state, followingInProgress: action.payload }
+
+
 
     default:
       return state
@@ -62,3 +68,4 @@ export const unfollowActionCreator = (payload) => ({ type: UNFOLLOW, payload })
 export const setUsersActionCreator = (payload) => ({ type: SET_USERS, payload })
 export const setCurrentPageActionCreator = (payload) => ({ type: SET_CURRENT_PAGE, payload })
 export const toggleIsFetchingActionCreator = (payload) => ({ type: TOGGLE_IS_FETCHING, payload })
+export const toggleFollowingProgress = (payload) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, payload })
