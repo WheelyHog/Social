@@ -6,12 +6,14 @@ const defaultState = {
     { id: 4, message: "Meow!!!", likeCount: 5 }
   ],
   newPostText: 'text',
-  profile: null
+  profile: null,
+  status: ''
 }
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 export const profileReducer = (state = defaultState, action) => {
 
@@ -33,6 +35,9 @@ export const profileReducer = (state = defaultState, action) => {
     case SET_USER_PROFILE:
       return { ...state, profile: action.payload }
 
+    case SET_STATUS:
+      return { ...state, status: action.payload }
+
     default:
       return state;
   }
@@ -52,3 +57,4 @@ export const updateNewPostTextActionCreator = (text) => {
 }
 
 export const setUserProfileAction = (payload) => ({ type: SET_USER_PROFILE, payload })
+export const setStatusAction = (payload) => ({ type: SET_STATUS, payload })
