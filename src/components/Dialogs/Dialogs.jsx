@@ -1,20 +1,27 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { sendMessageCreator } from '../../redux/dialogsReducer';
 import DialogItem from './DialogItem/DialogItem'
 import s from './Dialogs.module.css'
 import Message from './Message/Message'
+import AddMessageForm from './MessageForm/MessageForm';
 
-export default function Dialogs({ updateNewMessageBody, sendMessage, store }) {
+export default function Dialogs({ store }) {
+  const dispatch = useDispatch()
 
-  let messageBody = store.newMessageBody;
+  // let messageBody = store.newMessageBody;
 
-  let onSendMessageClick = () => {
-    sendMessage();
-  }
+  // let onSendMessageClick = () => {
+  //   sendMessage();
+  // }
 
-  const onNewMessageChange = (e) => {
-    let body = e.target.value;
-    updateNewMessageBody(body)
+  // const onNewMessageChange = (e) => {
+  //   let body = e.target.value;
+  //   updateNewMessageBody(body)
+  // }
+
+  const handleSubmit = (values) => {
+    dispatch(sendMessageCreator(values))
   }
 
   return (
@@ -26,10 +33,8 @@ export default function Dialogs({ updateNewMessageBody, sendMessage, store }) {
         <div>
           {store.messages.map(elem => <Message id={elem.id} message={elem.message} key={elem.id} />)}
         </div>
-        <div>
-          <div><textarea placeholder='Enter your message' value={messageBody} onChange={onNewMessageChange} className={s.message_body} /></div>
-          <div><button onClick={onSendMessageClick} className={s.send_btn}>Send</button></div>
-        </div>
+
+        <AddMessageForm onSubmit={handleSubmit} />
       </div>
     </div>
   )

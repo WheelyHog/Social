@@ -14,35 +14,17 @@ const defaultState = {
   newMessageBody: ''
 }
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 const SEND_MESSAGE = 'SEND_MESSAGE';
 
 export const dialogsReducer = (state = defaultState, action) => {
 
   switch (action.type) {
-    case UPDATE_NEW_MESSAGE_BODY: {
-      return { ...state, newMessageBody: action.body }
-
-    }
     case SEND_MESSAGE: {
-      const body = state.newMessageBody;
-      return { ...state, messages: [...state.messages, { id: Date.now(), message: body }], newMessageBody: '' }
-
+      return { ...state, messages: [...state.messages, { id: Date.now(), message: action.payload.message }] }
     }
     default:
       return state;
   }
 }
 
-export const sendMessageCreator = () => {
-  return {
-    type: SEND_MESSAGE
-  }
-}
-
-export const updateNewMessageBodyCreator = (body) => {
-  return {
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body: body
-  }
-}
+export const sendMessageCreator = (payload) => ({ type: SEND_MESSAGE, payload })

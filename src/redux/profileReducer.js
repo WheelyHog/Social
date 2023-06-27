@@ -5,13 +5,11 @@ const defaultState = {
     { id: 3, message: "Give me your motorcycle!", likeCount: 35 },
     { id: 4, message: "Meow!!!", likeCount: 5 }
   ],
-  newPostText: 'text',
   profile: null,
   status: ''
 }
 
 const ADD_POST = 'ADD_POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -22,14 +20,10 @@ export const profileReducer = (state = defaultState, action) => {
     case ADD_POST: {
       const newPost = {
         id: Date.now(),
-        message: state.newPostText,
+        message: action.payload.post,
         likeCount: 0
       }
-      return { ...state, posts: [...state.posts, newPost], newPostText: '' }
-    }
-
-    case UPDATE_NEW_POST_TEXT: {
-      return { ...state, newPostText: action.newText }
+      return { ...state, posts: [...state.posts, newPost] }
     }
 
     case SET_USER_PROFILE:
@@ -43,18 +37,7 @@ export const profileReducer = (state = defaultState, action) => {
   }
 }
 
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST
-  }
-}
-
-export const updateNewPostTextActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  }
-}
+export const addPostActionCreator = (payload) => ({ type: ADD_POST, payload })
 
 export const setUserProfileAction = (payload) => ({ type: SET_USER_PROFILE, payload })
 export const setStatusAction = (payload) => ({ type: SET_STATUS, payload })

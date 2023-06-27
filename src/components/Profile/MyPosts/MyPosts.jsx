@@ -1,30 +1,22 @@
-import React, { useRef } from 'react'
+import React from 'react'
+import { useDispatch } from 'react-redux';
+import { addPostActionCreator } from '../../../redux/profileReducer';
+import AddPostForm from './AddPostForm/AddPostForm';
 import s from './MyPosts.module.css'
 import Post from './Post/Post'
 
 
-export default function MyPosts({ posts, newPostText, addPost, updateNewPosts }) {
+export default function MyPosts({ posts }) {
+  const dispatch = useDispatch()
 
-  const onAddPost = () => {
-    addPost();
-  }
-
-  const newPostElement = useRef()
-
-  const onPostChange = () => {
-    let text = newPostElement.current.value;
-    updateNewPosts(text);
+  const handleSubmit = (values) => {
+    dispatch(addPostActionCreator(values))
   }
 
   return (
     <div className={s.postsBlock}>
       <h4>My Posts</h4>
-      <div>
-        <textarea className={s.posts__textarea} ref={newPostElement} onChange={onPostChange} value={newPostText} />
-        <div>
-          <button className={s.add__post} onClick={onAddPost}>Add Post</button>
-        </div>
-      </div>
+      <AddPostForm onSubmit={handleSubmit} />
       <div className={s.posts}>
         {posts.map(elem => <Post message={elem.message} likesCount={elem.likeCount} key={elem.id} />)}
       </div>

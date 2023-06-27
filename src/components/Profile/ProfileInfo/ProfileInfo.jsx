@@ -10,7 +10,7 @@ const ProfileInfo = ({ profile, userStatus }) => {
       <img className={s.content__img} src={city} alt="img"></img>
     </div>
     <div className={s.content__inner}>
-      <div className="desriptionBlock">
+      <div className="description_block">
         <img src={profile.photos.large} alt='profile_photo' />
         {/* <p>{profile.fullName}</p> */}
         <Status userStatus={userStatus} />
