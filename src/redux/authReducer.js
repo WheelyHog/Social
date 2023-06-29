@@ -13,6 +13,7 @@ const SET_USER_DATA = 'SET_USER_DATA'
 export const authReducer = (state = defaultState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
+      console.log(action.payload)
       return { ...state, messages: [action.payload.messages], data: { ...action.payload.data, isAuth: true } }
     default:
       return state

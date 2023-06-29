@@ -17,14 +17,32 @@ const Header = () => {
           dispatch(setUserDataAction(res.data))
         }
       })
-  }, [])
+  }, [dispatch])
 
   const auth = useSelector(store => store.auth)
+
+  const logout = () => {
+    authAPI.logout()
+      .then(res => {
+        console.log(res.data)
+        if (res.data.resultCode === 0) {
+          dispatch(setUserDataAction(null, null, null, false))
+        }
+      })
+  }
+
+  if (!auth) {
+    return <Navigate to={'/login'} />
+  }
 
   return <header className={s.header}>
     <img className={s.header__img} src={hog} alt="img"></img>
     <div className={s.login_block}>
-      {auth?.data.isAuth ? <p className={s.username}>{auth.data.login}</p>
+      {auth?.data.isAuth ?
+        <div>
+          <p className={s.username}>{auth.data.login}</p>
+          <button onClick={logout}>Logout</button>
+        </div>
         : <NavLink to={'/login'} className={s.login_link}>Login</NavLink>
       }
     </div>

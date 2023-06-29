@@ -29,16 +29,23 @@ export const usersAPI = {
         return response
       })
   },
-  // async getProfile(id) {
-  //   return instance.get(`profile/${id}`)
-  //     .then(response => {
-  //       return response
-  //     })
-  // }
 }
 
 export const authAPI = {
   me() {
     return instance.get(`auth/me`)
+  },
+  login(email, password, rememberMe = false) {
+    return instance.post(`auth/login`, { email, password, rememberMe })
+      .then(response => {
+        return response
+      })
+  },
+  logout() {
+    return instance.delete(`auth/login`)
+      .then(response => {
+        return response
+      })
+
   }
 }
