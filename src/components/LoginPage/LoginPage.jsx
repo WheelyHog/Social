@@ -11,7 +11,6 @@ export default function LoginPage() {
 
   const dispatch = useDispatch()
   const isAuth = useSelector(store => store.auth.data.isAuth)
-  console.log(isAuth)
 
   const onSubmit = (values) => {
     const { login, password, rememberMe } = values;

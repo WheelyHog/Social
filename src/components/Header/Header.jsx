@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, NavLink } from "react-router-dom";
 import { authAPI } from "../../api/api";
@@ -10,14 +10,14 @@ const Header = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    authAPI.me()
-      .then(res => {
-        if (res.data.resultCode === 0) {
-          dispatch(setUserDataAction(res.data))
-        }
-      })
-  }, [dispatch])
+  // useEffect(() => {
+  //   authAPI.me()
+  //     .then(res => {
+  //       if (res.data.resultCode === 0) {
+  //         dispatch(setUserDataAction(res.data))
+  //       }
+  //     })
+  // }, [dispatch])
 
   const auth = useSelector(store => store.auth)
 

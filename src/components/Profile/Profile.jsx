@@ -8,14 +8,13 @@ import { profileAPI } from "../../api/profile_api";
 
 export default function Profile() {
 
-  const dispatch = useDispatch()
   let { id } = useParams()
-  if (!id) {
-    id = 28309
-  }
 
+  const dispatch = useDispatch()
+  // const myId = useSelector(store => store.auth.data.id)
   const profile = useSelector(store => store.profilePage.profile)
   const userStatus = useSelector(store => store.profilePage.status);
+  const isAuth = useSelector(store => store.auth.data.isAuth)
 
   useEffect(() => {
     profileAPI.getProfile(id)
@@ -24,9 +23,15 @@ export default function Profile() {
     profileAPI.getStatus(id)
       .then(res => dispatch(setStatusAction(res.data)))
 
-  }, [dispatch, id])
+  }, [])
 
-  const isAuth = useSelector(store => store.auth.data.isAuth)
+
+  if (!id) {
+    id = 28309;
+    // if (!myId) {
+    //   return <Navigate to={'/login'} />
+    // }
+  }
 
   if (!isAuth) {
     return <Navigate to={'/login'} />

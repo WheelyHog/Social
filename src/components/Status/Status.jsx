@@ -13,7 +13,6 @@ export default function Status({ userStatus }) {
 
   const deActivateEditMode = () => {
     setEditMode(false)
-    console.log(status)
     profileAPI.updateStatus(status)
   }
 
