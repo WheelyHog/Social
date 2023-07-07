@@ -17,7 +17,6 @@ const Profile = React.lazy(() => import('./components/Profile/Profile'))
 function App() {
   const dispatch = useDispatch()
   const initialized = useSelector(store => store.app.initialized)
-  console.log(initialized)
   useEffect(() => {
     authAPI.me()
       .then(res => {

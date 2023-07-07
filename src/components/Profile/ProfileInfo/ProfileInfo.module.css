@@ -6,3 +6,7 @@
 .content__inner {
   padding: 15px;
 }
+
+.content__inner img {
+  width: 300px;
+}

@@ -11,7 +11,7 @@ export default function Profile() {
   let { id } = useParams()
 
   const dispatch = useDispatch()
-  // const myId = useSelector(store => store.auth.data.id)
+  const myId = useSelector(store => store.auth.data.id)
   const profile = useSelector(store => store.profilePage.profile)
   const userStatus = useSelector(store => store.profilePage.status);
   const isAuth = useSelector(store => store.auth.data.isAuth)
@@ -25,6 +25,10 @@ export default function Profile() {
 
   }, [])
 
+  const savePhoto = (photo) => {
+    profileAPI.saveProfilePhoto(photo)
+      .then(res => dispatch(savePhoto(res.data.data.photos)))
+  }
 
   if (!id) {
     id = 28309;
@@ -39,7 +43,7 @@ export default function Profile() {
 
   return (
     <div>
-      {profile && <ProfileInfo profile={profile} userStatus={userStatus} />}
+      {profile && <ProfileInfo profile={profile} userStatus={userStatus} isowner={+id === +myId} savePhoto={savePhoto} />}
       <MyPostsContainer />
     </div>
   )

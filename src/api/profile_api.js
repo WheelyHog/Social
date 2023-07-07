@@ -21,6 +21,19 @@ export const profileAPI = {
         return response
       })
   },
+  async saveProfilePhoto(photo) {
+    const formData = new FormData();
+    formData.append('image', photo)
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+      .then(response => {
+        return response
+      })
+  },
+
 }
 
 export const authAPI = {

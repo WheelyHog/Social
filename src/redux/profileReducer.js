@@ -12,6 +12,7 @@ const defaultState = {
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const SAVE_PHOTO = 'SAVE_PHOTO'
 
 export const profileReducer = (state = defaultState, action) => {
 
@@ -32,6 +33,9 @@ export const profileReducer = (state = defaultState, action) => {
     case SET_STATUS:
       return { ...state, status: action.payload }
 
+    case SAVE_PHOTO:
+      return { ...state, profile: { ...state.profile, photos: { large: action.payload } } }
+
     default:
       return state;
   }
@@ -41,3 +45,4 @@ export const addPostActionCreator = (payload) => ({ type: ADD_POST, payload })
 
 export const setUserProfileAction = (payload) => ({ type: SET_USER_PROFILE, payload })
 export const setStatusAction = (payload) => ({ type: SET_STATUS, payload })
+export const savePhotoAction = (payload) => ({ type: SAVE_PHOTO, payload })

@@ -4,8 +4,8 @@ import s from './Status.module.css'
 
 export default function Status({ userStatus }) {
 
-  const [editMode, setEditMode] = useState(false)
   const [status, setStatus] = useState(userStatus)
+  const [editMode, setEditMode] = useState(false)
 
   const activateEditMode = () => {
     setEditMode(true)

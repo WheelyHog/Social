@@ -38,3 +38,16 @@ export const Input = ({ input, meta, ...props }) => {
     </div>
   )
 }
+
+export const Checkbox = ({ input, meta, ...props }) => {
+
+  // const hasError = meta.error && meta.touched;
+  return (
+    <div className={s.form_control}>
+      <div>
+        <input type={'checkbox'} {...input} {...props} />
+      </div>
+      {/* {hasError && <span>{meta.error}</span>} */}
+    </div>
+  )
+}
